@@ -69,7 +69,7 @@ export default function InsightsPage() {
                     href={a.source.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-blue-600 hover:underline font-semibold ml-1"
+                    className="inline-flex items-center min-h-11 md:min-h-0 text-blue-600 hover:underline font-semibold ml-1"
                   >
                     {a.source.label} ↗
                   </a>
@@ -172,7 +172,7 @@ export default function InsightsPage() {
                     href={m.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-blue-600 hover:underline font-semibold"
+                    className="inline-flex items-center min-h-11 md:min-h-0 text-blue-600 hover:underline font-semibold"
                   >
                     기사 원문 ↗
                   </a>

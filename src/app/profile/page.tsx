@@ -115,7 +115,7 @@ export default function ProfilePage() {
               <dd>
                 <a
                   href={`mailto:${profile.contact.email}`}
-                  className="font-semibold text-slate-900 hover:text-blue-600 text-base"
+                  className="inline-flex items-center min-h-11 md:min-h-0 font-semibold text-slate-900 hover:text-blue-600 text-base"
                 >
                   {profile.contact.email}
                 </a>

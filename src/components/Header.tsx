@@ -34,7 +34,7 @@ export default function Header() {
             <span className="block font-bold text-lg text-slate-900 tracking-tight group-hover:text-blue-600 transition-colors">
               유경원
             </span>
-            <span className="block text-[11px] font-medium tracking-wider uppercase text-slate-500">
+            <span className="block text-xs font-medium tracking-wider uppercase text-slate-500">
               Kyung Won Yoo
             </span>
           </div>
@@ -66,7 +66,7 @@ export default function Header() {
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
           aria-expanded={open}
-          className="md:hidden w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex flex-col items-center justify-center gap-[5px] text-slate-700 hover:bg-slate-200 transition-colors"
+          className="md:hidden w-11 h-11 -mr-1 rounded-xl bg-slate-100 border border-slate-200 flex flex-col items-center justify-center gap-[5px] text-slate-700 hover:bg-slate-200 transition-colors"
         >
           <span
             className={`block w-[18px] h-[2px] bg-slate-700 transition-transform duration-200 ${

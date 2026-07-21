@@ -25,7 +25,7 @@ export default function Footer() {
             <dd>
               <a
                 href={`mailto:${profile.contact.email}`}
-                className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
+                className="inline-flex items-center min-h-11 md:min-h-0 text-blue-400 hover:text-blue-300 font-medium transition-colors"
               >
                 {profile.contact.email}
               </a>
@@ -43,7 +43,7 @@ export default function Footer() {
             href="https://kcge.smu.ac.kr/sbe/info/faculty01.do?mode=view&empNo=10126915"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 min-h-11 md:min-h-0 px-4 py-2.5 md:py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"
           >
             <span>상명대 학부 공식 프로필</span>
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

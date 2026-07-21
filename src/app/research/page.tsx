@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { publications } from "@/data/publications";
 import PageHero from "@/components/PageHero";
 import ResearchList from "@/components/ResearchList";
+import BackToTop from "@/components/BackToTop";
 
 export const metadata: Metadata = {
   title: "연구",
@@ -23,6 +24,7 @@ export default function ResearchPage() {
           <ResearchList />
         </div>
       </section>
+      <BackToTop />
     </>
   );
 }
