@@ -35,7 +35,7 @@ export default function Header() {
               유경원
             </span>
             <span className="block text-xs font-medium tracking-wider uppercase text-slate-500">
-              Kyung Won Yoo
+              Kyeongwon Yoo
             </span>
           </div>
         </Link>

@@ -38,7 +38,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4 text-[13px] text-slate-400">
-          <span>© {new Date().getFullYear()} Kyung Won Yoo. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Kyeongwon Yoo. All rights reserved.</span>
           <a
             href="https://kcge.smu.ac.kr/sbe/info/faculty01.do?mode=view&empNo=10126915"
             target="_blank"

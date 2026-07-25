@@ -16,7 +16,7 @@ export default function ProfilePage() {
       <PageHero
         kicker="Curriculum Vitae"
         title="약력"
-        desc="연구기관(KDI) · 중앙은행(한국은행) · 산업연구원(보험연구원) · 대학을 모두 거친 궤적입니다."
+        desc="연구기관(KDI) · 중앙은행(한국은행) · 정책연구원(보험연구원) · 대학을 모두 거친 궤적입니다."
       />
 
       {/* 재직 궤적 요약 */}
@@ -56,6 +56,11 @@ export default function ProfilePage() {
                   </h3>
                   <p className="text-sm font-medium text-slate-600 mt-1">
                     {e.degree} · {e.field}
+                    {e.note && (
+                      <span className="text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-200/60 px-2 py-0.5 rounded-full ml-2">
+                        {e.note}
+                      </span>
+                    )}
                   </p>
                 </div>
                 <span className="num text-xs font-semibold text-slate-500 bg-white px-3.5 py-1.5 rounded-full border border-slate-200 shrink-0 self-start md:self-auto">
