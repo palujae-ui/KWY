@@ -121,7 +121,7 @@ export const mediaAppearances: MediaAppearance[] = [
     outlet: "시사저널",
     reporter: "오유진 기자",
     date: "2025.06.27",
-    url: "https://www.sisajournal.com/",
+    url: "https://www.sisajournal.com/news/articleView.html?idxno=337613",
     context:
       "정부의 대규모 채무조정(빚 탕감) 정책을 둘러싼 논쟁을 다룬 기사. 유경원 교수가 보고서를 통해 제기한 정책 설계상의 문제를 인용했습니다.",
     quotes: [
@@ -147,7 +147,7 @@ export const mediaAppearances: MediaAppearance[] = [
     outlet: "경향신문",
     reporter: "배재흥 기자",
     date: "2025.09.15",
-    url: "https://www.khan.co.kr/",
+    url: "https://www.khan.co.kr/article/202509150600151",
     context:
       "인터넷전문은행의 대면 고객센터가 수도권에 집중된 문제를 다룬 기사. 디지털 금융소외를 연구한 유경원 교수의 견해를 인용했습니다.",
     quotes: [
