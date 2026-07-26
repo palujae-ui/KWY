@@ -11,10 +11,10 @@ export const dynamic = "force-dynamic";
  * Step 1(현재): 로그인 확인 + 섹션 목록(자리표시). 실제 편집 CRUD는 다음 단계에서 연결.
  */
 const SECTIONS = [
+  { key: "columns", label: "경제 인사이트 (칼럼)", desc: "내일신문 경제시평 등 기고", href: "/admin/columns", ready: true },
   { key: "profile", label: "프로필 · 소개", desc: "성함·소속·헤드라인·소개·연락처", ready: false },
   { key: "career", label: "약력", desc: "학력·근무경력·위원 활동", ready: false },
   { key: "publications", label: "연구 (논문)", desc: "논문·보고서·수상", ready: false },
-  { key: "columns", label: "경제 인사이트 (칼럼)", desc: "내일신문 경제시평 등 기고", ready: false },
   { key: "media", label: "언론 인용·인터뷰", desc: "방송·신문 인용", ready: false },
   { key: "videos", label: "방송·영상", desc: "유튜브 영상", ready: false },
 ];
@@ -84,19 +84,28 @@ export default async function AdminDashboard() {
                 </div>
                 <p className="text-sm text-slate-500 mt-1.5">{s.desc}</p>
               </div>
-              <button
-                type="button"
-                disabled
-                className="mt-4 self-start text-sm font-medium text-slate-400 bg-slate-100 rounded-lg px-4 py-2 cursor-not-allowed"
-              >
-                편집 (다음 단계)
-              </button>
+              {s.ready && s.href ? (
+                <Link
+                  href={s.href}
+                  className="mt-4 self-start text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-4 py-2 transition-colors"
+                >
+                  편집하기 →
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  disabled
+                  className="mt-4 self-start text-sm font-medium text-slate-400 bg-slate-100 rounded-lg px-4 py-2 cursor-not-allowed"
+                >
+                  편집 (다음 단계)
+                </button>
+              )}
             </div>
           ))}
         </div>
 
         <p className="text-xs text-slate-400 mt-8">
-          현재는 로그인·인증 기반이 완성된 단계입니다. 각 항목의 실제 편집 기능은 순차적으로 연결됩니다.
+          ‘경제 인사이트(칼럼)’ 편집이 활성화되었습니다. 나머지 항목은 순차적으로 연결됩니다.
         </p>
       </div>
     </main>

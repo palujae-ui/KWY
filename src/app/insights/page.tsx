@@ -3,13 +3,16 @@ import {
   policyActivities,
   editorships,
   books,
-  columns,
   mediaAppearances,
   videos,
 } from "@/data/insights";
+import { getColumns } from "@/lib/content";
 import PageHero from "@/components/PageHero";
 import SectionTitle from "@/components/SectionTitle";
 import VideoEmbed from "@/components/VideoEmbed";
+
+// 칼럼은 DB에서 읽으므로, 저장 후 최대 10초 내 반영(관리자 저장 시 즉시 revalidate).
+export const revalidate = 10;
 
 export const metadata: Metadata = {
   title: "정책·기고",
@@ -17,7 +20,8 @@ export const metadata: Metadata = {
     "금융위원회 신용평가체계 개편 T/F 위원·새출발기금 심사위원장 등 정책 활동, 내일신문 「경제시평」 연재 칼럼, 언론 인용·방송 출연 및 학술지 편집 활동.",
 };
 
-export default function InsightsPage() {
+export default async function InsightsPage() {
+  const columns = await getColumns();
   return (
     <>
       <PageHero
