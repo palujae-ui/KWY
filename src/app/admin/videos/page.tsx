@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { AdminShell, ui } from "../_ui";
 import { createVideo, updateVideo, deleteVideo } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -16,9 +16,8 @@ type Row = {
   related_topic: string | null;
 };
 
-const inputCls =
-  "w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm text-slate-900";
-const labelCls = "block text-xs font-semibold text-slate-600 mb-1";
+const inputCls = ui.input;
+const labelCls = ui.label;
 
 function Fields({ r }: { r?: Row }) {
   return (
@@ -96,28 +95,8 @@ export default async function AdminVideosPage() {
   const rows = (data ?? []) as Row[];
 
   return (
-    <main className="min-h-screen bg-slate-50">
-      <header className="bg-white border-b border-slate-200">
-        <div className="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3 text-sm">
-            <Link href="/admin" className="text-slate-500 hover:text-slate-900">
-              ← 관리자
-            </Link>
-            <span className="text-slate-300">/</span>
-            <span className="font-bold text-slate-900">방송·영상</span>
-          </div>
-          <Link
-            href="/insights"
-            target="_blank"
-            className="text-sm font-medium text-blue-600 hover:text-blue-700"
-          >
-            공개 페이지 보기 ↗
-          </Link>
-        </div>
-      </header>
-
-      <div className="max-w-3xl mx-auto px-6 py-10">
-        <section className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
+    <AdminShell breadcrumb="방송·영상" viewHref="/insights">
+        <section className="bg-white rounded-2xl border border-slate-300 p-6 shadow-sm">
           <h2 className="font-bold text-slate-900 mb-4">＋ 새 영상 추가</h2>
           <form action={createVideo} className="space-y-3">
             <Fields />
@@ -139,12 +118,12 @@ export default async function AdminVideosPage() {
 
         <div className="space-y-3">
           {rows.map((r) => (
-            <details key={r.id} className="group bg-white rounded-2xl border border-slate-200 shadow-xs">
+            <details key={r.id} className="group bg-white rounded-2xl border border-slate-300 shadow-sm">
               <summary className="flex items-center gap-4 px-5 py-4 cursor-pointer list-none">
                 <img
                   src={`https://i.ytimg.com/vi/${r.youtube_id}/mqdefault.jpg`}
                   alt=""
-                  className="w-24 aspect-video object-cover rounded-md border border-slate-200 shrink-0"
+                  className="w-24 aspect-video object-cover rounded-md border border-slate-300 shrink-0"
                 />
                 <div className="min-w-0 flex-1">
                   <p className="font-semibold text-slate-900 truncate">{r.title}</p>
@@ -157,7 +136,7 @@ export default async function AdminVideosPage() {
                   편집 ▾
                 </span>
               </summary>
-              <div className="border-t border-slate-100 p-5">
+              <div className="border-t border-slate-200 p-5">
                 <form action={updateVideo} className="space-y-3">
                   <input type="hidden" name="id" value={r.id} />
                   <Fields r={r} />
@@ -168,7 +147,7 @@ export default async function AdminVideosPage() {
                     저장
                   </button>
                 </form>
-                <form action={deleteVideo} className="mt-3 pt-3 border-t border-slate-100">
+                <form action={deleteVideo} className="mt-3 pt-3 border-t border-slate-200">
                   <input type="hidden" name="id" value={r.id} />
                   <button type="submit" className="text-xs font-medium text-red-600 hover:text-red-700">
                     이 영상 삭제
@@ -178,7 +157,6 @@ export default async function AdminVideosPage() {
             </details>
           ))}
         </div>
-      </div>
-    </main>
+    </AdminShell>
   );
 }

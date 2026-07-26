@@ -1,13 +1,12 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { AdminShell, ui } from "../_ui";
 import { updateProfile } from "./actions";
 
 export const dynamic = "force-dynamic";
 
-const inputCls =
-  "w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm text-slate-900";
-const labelCls = "block text-xs font-semibold text-slate-600 mb-1";
+const inputCls = ui.input;
+const labelCls = ui.label;
 
 export default async function AdminProfilePage() {
   const supabase = await createClient();
@@ -21,24 +20,10 @@ export default async function AdminProfilePage() {
   const introText = Array.isArray(p.intro) ? p.intro.join("\n\n") : "";
 
   return (
-    <main className="min-h-screen bg-slate-50">
-      <header className="bg-white border-b border-slate-200">
-        <div className="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3 text-sm">
-            <Link href="/admin" className="text-slate-500 hover:text-slate-900">← 관리자</Link>
-            <span className="text-slate-300">/</span>
-            <span className="font-bold text-slate-900">프로필 · 소개</span>
-          </div>
-          <Link href="/" target="_blank" className="text-sm font-medium text-blue-600 hover:text-blue-700">
-            홈페이지 보기 ↗
-          </Link>
-        </div>
-      </header>
-
-      <div className="max-w-3xl mx-auto px-6 py-10">
+    <AdminShell breadcrumb="프로필 · 소개" viewHref="/">
         <form action={updateProfile} className="space-y-6">
           {/* 헤드라인 */}
-          <section className="bg-white rounded-2xl border border-blue-200 p-6 shadow-xs">
+          <section className="bg-white rounded-2xl border border-blue-200 p-6 shadow-sm">
             <h2 className="font-bold text-slate-900 mb-1">홈 헤드라인 (한 줄 소개)</h2>
             <p className="text-xs text-slate-500 mb-3">
               홈페이지 첫 화면에 크게 표시되는 문구입니다. 교수님의 커리어를 한 줄로 규정합니다.
@@ -47,7 +32,7 @@ export default async function AdminProfilePage() {
           </section>
 
           {/* 소개글 */}
-          <section className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
+          <section className="bg-white rounded-2xl border border-slate-300 p-6 shadow-sm">
             <h2 className="font-bold text-slate-900 mb-1">소개 글</h2>
             <p className="text-xs text-slate-500 mb-3">
               문단을 나누려면 <b>빈 줄(엔터 두 번)</b>로 구분하세요.
@@ -56,7 +41,7 @@ export default async function AdminProfilePage() {
           </section>
 
           {/* 기본 정보 */}
-          <section className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-3">
+          <section className="bg-white rounded-2xl border border-slate-300 p-6 shadow-sm space-y-3">
             <h2 className="font-bold text-slate-900 mb-1">기본 정보</h2>
             <div className="grid grid-cols-3 gap-3">
               <div>
@@ -89,7 +74,7 @@ export default async function AdminProfilePage() {
           </section>
 
           {/* 연락처 */}
-          <section className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-3">
+          <section className="bg-white rounded-2xl border border-slate-300 p-6 shadow-sm space-y-3">
             <h2 className="font-bold text-slate-900 mb-1">연락처</h2>
             <div className="grid grid-cols-3 gap-3">
               <div>
@@ -117,7 +102,6 @@ export default async function AdminProfilePage() {
             저장하기
           </button>
         </form>
-      </div>
-    </main>
+    </AdminShell>
   );
 }

@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { adminIdToEmail } from "@/lib/admin";
 
+const inputCls =
+  "w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10";
+
 export default function AdminLoginPage() {
   const router = useRouter();
   const [id, setId] = useState("");
@@ -28,38 +31,31 @@ export default function AdminLoginPage() {
       setLoading(false);
       return;
     }
-
-    // 세션 쿠키가 설정된 뒤 대시보드로
     router.push("/admin");
     router.refresh();
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
-      <div className="w-full max-w-sm">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-lg">
-              유
-            </div>
-            <div className="text-left">
-              <p className="font-bold text-lg text-slate-900 leading-none">
-                유경원 홈페이지
-              </p>
-              <p className="text-xs text-slate-500 mt-1">관리자 로그인</p>
-            </div>
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 px-4 relative overflow-hidden">
+      {/* 배경 장식 */}
+      <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-600/20 blur-3xl" />
+      <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-indigo-600/20 blur-3xl" />
+
+      <div className="relative w-full max-w-sm">
+        <div className="text-center mb-7">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white text-2xl font-bold shadow-lg shadow-blue-900/40 mb-4">
+            유
           </div>
+          <h1 className="text-xl font-bold text-white">유경원 홈페이지</h1>
+          <p className="text-sm text-slate-400 mt-1">관리자 콘솔</p>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-2xl border border-slate-200 shadow-sm p-7 space-y-4"
+          className="bg-white/95 backdrop-blur rounded-2xl shadow-2xl shadow-black/30 p-7 space-y-4"
         >
           <div>
-            <label
-              htmlFor="admin-id"
-              className="block text-sm font-semibold text-slate-700 mb-1.5"
-            >
+            <label htmlFor="admin-id" className="block text-sm font-semibold text-slate-700 mb-1.5">
               아이디
             </label>
             <input
@@ -69,15 +65,12 @@ export default function AdminLoginPage() {
               value={id}
               onChange={(e) => setId(e.target.value)}
               required
-              className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-slate-900"
+              className={inputCls}
             />
           </div>
 
           <div>
-            <label
-              htmlFor="admin-pw"
-              className="block text-sm font-semibold text-slate-700 mb-1.5"
-            >
+            <label htmlFor="admin-pw" className="block text-sm font-semibold text-slate-700 mb-1.5">
               비밀번호
             </label>
             <input
@@ -87,12 +80,15 @@ export default function AdminLoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-slate-900"
+              className={inputCls}
             />
           </div>
 
           {error && (
-            <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+            <p className="flex items-center gap-2 text-sm text-rose-600 bg-rose-50 border border-rose-200 rounded-xl px-3.5 py-2.5">
+              <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
               {error}
             </p>
           )}
@@ -100,14 +96,14 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-semibold transition-colors"
+            className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-semibold shadow-sm shadow-blue-600/25 transition hover:-translate-y-px active:translate-y-0"
           >
             {loading ? "로그인 중…" : "로그인"}
           </button>
         </form>
 
-        <p className="text-center text-xs text-slate-400 mt-6">
-          이 페이지는 유경원 교수님 전용 관리자 화면입니다.
+        <p className="text-center text-xs text-slate-500 mt-6">
+          유경원 교수님 전용 관리자 화면입니다.
         </p>
       </div>
     </main>

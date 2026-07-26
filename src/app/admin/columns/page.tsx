@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { AdminShell, ui } from "../_ui";
 import { createColumn, updateColumn, deleteColumn } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -13,8 +13,7 @@ type Row = {
   url: string | null;
 };
 
-const inputCls =
-  "w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm text-slate-900";
+const inputCls = ui.input;
 
 export default async function AdminColumnsPage() {
   const supabase = await createClient();
@@ -30,29 +29,9 @@ export default async function AdminColumnsPage() {
   const rows = (data ?? []) as Row[];
 
   return (
-    <main className="min-h-screen bg-slate-50">
-      <header className="bg-white border-b border-slate-200">
-        <div className="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3 text-sm">
-            <Link href="/admin" className="text-slate-500 hover:text-slate-900">
-              ← 관리자
-            </Link>
-            <span className="text-slate-300">/</span>
-            <span className="font-bold text-slate-900">경제 인사이트 (칼럼)</span>
-          </div>
-          <Link
-            href="/insights"
-            target="_blank"
-            className="text-sm font-medium text-blue-600 hover:text-blue-700"
-          >
-            공개 페이지 보기 ↗
-          </Link>
-        </div>
-      </header>
-
-      <div className="max-w-3xl mx-auto px-6 py-10">
+    <AdminShell breadcrumb="경제 인사이트 (칼럼)" viewHref="/insights">
         {/* 새 칼럼 추가 */}
-        <section className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
+        <section className="bg-white rounded-2xl border border-slate-300 p-6 shadow-sm">
           <h2 className="font-bold text-slate-900 mb-4">＋ 새 칼럼 추가</h2>
           <form action={createColumn} className="space-y-3">
             <div>
@@ -106,7 +85,7 @@ export default async function AdminColumnsPage() {
           {rows.map((r) => (
             <details
               key={r.id}
-              className="group bg-white rounded-2xl border border-slate-200 shadow-xs"
+              className="group bg-white rounded-2xl border border-slate-300 shadow-sm"
             >
               <summary className="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none">
                 <div className="min-w-0">
@@ -120,7 +99,7 @@ export default async function AdminColumnsPage() {
                 </span>
               </summary>
 
-              <div className="border-t border-slate-100 p-5">
+              <div className="border-t border-slate-200 p-5">
                 <form action={updateColumn} className="space-y-3">
                   <input type="hidden" name="id" value={r.id} />
                   <div>
@@ -159,7 +138,7 @@ export default async function AdminColumnsPage() {
                   </div>
                 </form>
 
-                <form action={deleteColumn} className="mt-3 pt-3 border-t border-slate-100">
+                <form action={deleteColumn} className="mt-3 pt-3 border-t border-slate-200">
                   <input type="hidden" name="id" value={r.id} />
                   <button
                     type="submit"
@@ -172,7 +151,6 @@ export default async function AdminColumnsPage() {
             </details>
           ))}
         </div>
-      </div>
-    </main>
+    </AdminShell>
   );
 }
