@@ -5,14 +5,16 @@ import {
   books,
   columns,
   mediaAppearances,
+  videos,
 } from "@/data/insights";
 import PageHero from "@/components/PageHero";
 import SectionTitle from "@/components/SectionTitle";
+import VideoEmbed from "@/components/VideoEmbed";
 
 export const metadata: Metadata = {
   title: "정책·기고",
   description:
-    "금융위원회 신용평가체계 개편 T/F 위원·새출발기금 심사위원장 등 정책 활동, 내일신문 「경제시평」 연재 칼럼, 언론 인용 및 학술지 편집 활동.",
+    "금융위원회 신용평가체계 개편 T/F 위원·새출발기금 심사위원장 등 정책 활동, 내일신문 「경제시평」 연재 칼럼, 언론 인용·방송 출연 및 학술지 편집 활동.",
 };
 
 export default function InsightsPage() {
@@ -198,6 +200,24 @@ export default function InsightsPage() {
           </div>
         </div>
       </section>
+
+      {/* 방송·영상 */}
+      {videos.length > 0 && (
+        <section className="section-y border-b border-slate-200/80 bg-white">
+          <div className="container-kwy">
+            <SectionTitle
+              kicker="Broadcast & Video"
+              title="방송·영상"
+              desc="방송 출연 및 발표 영상입니다. 재생 버튼을 누르면 이 화면에서 바로 재생됩니다."
+            />
+            <div className="grid gap-6 md:grid-cols-2">
+              {videos.map((v) => (
+                <VideoEmbed key={v.youtubeId} video={v} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 학술지 편집 */}
       <section className="section-y border-b border-slate-200/80 bg-white">

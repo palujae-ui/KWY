@@ -171,3 +171,49 @@ export const mediaAppearances: MediaAppearance[] = [
     relatedTopic: "가계부채 · 소득분배",
   },
 ];
+
+/**
+ * 방송·영상 — 방송 출연 및 발표 영상 (유튜브)
+ * 유튜브 임베드(백엔드 불필요). 썸네일은 public/video-thumbs/{youtubeId}.jpg 로 로컬 보관.
+ * startSeconds 지정 시 해당 시점부터 재생.
+ */
+export type VideoItem = {
+  youtubeId: string;
+  title: string;
+  channel: string;
+  date?: string;
+  /** 재생 시작 시점(초). 예: 포럼 발표가 1시간 지점부터 → 3600 */
+  startSeconds?: number;
+  note?: string;
+  relatedTopic?: string;
+};
+
+export const videos: VideoItem[] = [
+  {
+    youtubeId: "mpmh7mMU6R0",
+    title: "소득 이어 지출도 양극화…지난해 가계 흑자 사상 최고",
+    channel: "YTN",
+    relatedTopic: "소득분배 · 가계저축",
+  },
+  {
+    youtubeId: "Wopvrn0g9Ow",
+    title: "지난해 전 분기 전국 가계 흑자율 30% 이상…사상 최대",
+    channel: "JTBC 아침&",
+    relatedTopic: "가계저축 · 소비",
+  },
+  {
+    youtubeId: "Srk22aerfd4",
+    title: "‘4년새 빚은 두배나 껑충, 소득은 7% 감소’…20대가 제일 힘들다",
+    channel: "KBS News",
+    date: "2023.12.15",
+    relatedTopic: "가계부채 · 소득분배",
+  },
+  {
+    youtubeId: "htKh-hbzqhU",
+    title: "제4회 한국의 사회동향 포럼 — 유경원 교수 발표",
+    channel: "KOSSDA 한국사회과학자료원",
+    startSeconds: 3600,
+    note: "발표는 영상 1시간(1:00:00) 지점부터 시작됩니다.",
+    relatedTopic: "사회동향 · 소득분배",
+  },
+];
