@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { profile } from "@/data/profile";
-import { career, education, trajectory } from "@/data/career";
+import { trajectory } from "@/data/career";
+import { getEducation, getCareer } from "@/lib/content";
 import PageHero from "@/components/PageHero";
 import SectionTitle from "@/components/SectionTitle";
 
@@ -10,7 +11,10 @@ export const metadata: Metadata = {
     "유경원 교수의 학력과 경력. 한국개발연구원(KDI), 한국은행, 보험연구원을 거쳐 상명대학교 경제금융학부 재직.",
 };
 
-export default function ProfilePage() {
+export const revalidate = 10;
+
+export default async function ProfilePage() {
+  const [education, career] = await Promise.all([getEducation(), getCareer()]);
   return (
     <>
       <PageHero
@@ -63,9 +67,13 @@ export default function ProfilePage() {
                     )}
                   </p>
                 </div>
-                <span className="num text-xs font-semibold text-slate-500 bg-white px-3.5 py-1.5 rounded-full border border-slate-200 shrink-0 self-start md:self-auto">
-                  {e.ym.slice(0, 4)}.{e.ym.slice(4)}
-                </span>
+                {e.ym && (
+                  <span className="num text-xs font-semibold text-slate-500 bg-white px-3.5 py-1.5 rounded-full border border-slate-200 shrink-0 self-start md:self-auto">
+                    {e.ym.length >= 6
+                      ? `${e.ym.slice(0, 4)}.${e.ym.slice(4)}`
+                      : e.ym}
+                  </span>
+                )}
               </div>
             ))}
           </div>

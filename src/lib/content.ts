@@ -14,6 +14,12 @@ import {
   type PubType,
   type Topic,
 } from "@/data/publications";
+import {
+  education as fallbackEducation,
+  career as fallbackCareer,
+  type Education,
+  type CareerItem,
+} from "@/data/career";
 
 /**
  * 공개 페이지용 데이터 조회 — anon 키(쿠키 없음) 클라이언트.
@@ -58,6 +64,44 @@ export async function getPublications(): Promise<Publication[]> {
     }));
   } catch {
     return fallbackPubs.map((p) => ({ ...p, featured: featuredIds.includes(p.id) }));
+  }
+}
+
+export async function getEducation(): Promise<Education[]> {
+  try {
+    const { data, error } = await publicDb
+      .from("education")
+      .select("degree, field, school, ym, note")
+      .order("sort_order", { ascending: true });
+    if (error || !data || data.length === 0) return fallbackEducation;
+    return data.map((r) => ({
+      degree: r.degree,
+      field: r.field,
+      school: r.school,
+      ym: r.ym,
+      note: r.note ?? undefined,
+    }));
+  } catch {
+    return fallbackEducation;
+  }
+}
+
+export async function getCareer(): Promise<CareerItem[]> {
+  try {
+    const { data, error } = await publicDb
+      .from("career")
+      .select("role, org, from_period, to_period, is_primary")
+      .order("sort_order", { ascending: true });
+    if (error || !data || data.length === 0) return fallbackCareer;
+    return data.map((r) => ({
+      role: r.role,
+      org: r.org,
+      from: r.from_period,
+      to: r.to_period,
+      primary: !!r.is_primary,
+    }));
+  } catch {
+    return fallbackCareer;
   }
 }
 
