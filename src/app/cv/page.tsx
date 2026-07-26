@@ -1,19 +1,16 @@
 import type { Metadata } from "next";
-import { profile } from "@/data/profile";
-import { career, education } from "@/data/career";
-import { publications, formatYm, ymNum } from "@/data/publications";
+import { formatYm, ymNum } from "@/data/publications";
 import { books } from "@/data/insights";
+import { getProfile, getPublications, getEducation, getCareer } from "@/lib/content";
 import PrintButton from "@/components/PrintButton";
 import Portrait from "@/components/Portrait";
 
 export const metadata: Metadata = {
   title: "CV",
-  description: "유경원 교수 이력서 (Curriculum Vitae) — 학력, 경력, 논문 55편.",
+  description: "유경원 교수 이력서 (Curriculum Vitae) — 학력, 경력, 논문.",
 };
 
-const sorted = [...publications].sort(
-  (a, b) => ymNum(b.ym) - ymNum(a.ym) || b.id - a.id
-);
+export const revalidate = 10;
 
 function Rule({ children }: { children: string }) {
   return (
@@ -23,7 +20,16 @@ function Rule({ children }: { children: string }) {
   );
 }
 
-export default function CvPage() {
+export default async function CvPage() {
+  const [profile, publications, education, career] = await Promise.all([
+    getProfile(),
+    getPublications(),
+    getEducation(),
+    getCareer(),
+  ]);
+  const sorted = [...publications].sort(
+    (a, b) => ymNum(b.ym) - ymNum(a.ym) || b.id - a.id
+  );
   return (
     <div className="container-kwy py-12 md:py-16">
       {/* 머리말 */}
@@ -66,10 +72,10 @@ export default function CvPage() {
           <section className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs">
             <Rule>Education</Rule>
             <ul className="space-y-4">
-              {education.map((e) => (
-                <li key={e.ym}>
+              {education.map((e, i) => (
+                <li key={`${e.school}-${i}`}>
                   <span className="num text-xs font-semibold text-slate-400">
-                    {e.ym.slice(0, 4)}
+                    {e.ym ? e.ym.slice(0, 4) : ""}
                   </span>
                   <p className="font-bold text-slate-900 text-base">
                     {e.school}

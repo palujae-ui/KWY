@@ -125,16 +125,17 @@ export const ALL_TOPICS: Topic[] = [
 
 export const ALL_TYPES: PubType[] = ["해외저널", "국내저널", "보고서"];
 
-/** "201803" → 2018 */
-export const yearOf = (ym: string): number => Number(ym.slice(0, 4));
+/** "201803" → 2018 (null 안전) */
+export const yearOf = (ym: string | null | undefined): number =>
+  ym ? Number(ym.slice(0, 4)) : 0;
 
-/** 정렬용 숫자 키 — "201803" → 201803, "2014"(연도만) → 201400 (연·월 모두 반영) */
-export const ymNum = (ym: string): number =>
-  Number(ym.length >= 6 ? ym.slice(0, 6) : ym.slice(0, 4) + "00");
+/** 정렬용 숫자 키 — "201803" → 201803, "2014"(연도만) → 201400 (null 안전) */
+export const ymNum = (ym: string | null | undefined): number =>
+  ym ? Number(ym.length >= 6 ? ym.slice(0, 6) : ym.slice(0, 4) + "00") : 0;
 
-/** "201803" → "2018.03", "2014" → "2014" */
-export const formatYm = (ym: string): string =>
-  ym.length === 6 ? `${ym.slice(0, 4)}.${ym.slice(4)}` : ym;
+/** "201803" → "2018.03", "2014" → "2014" (null 안전) */
+export const formatYm = (ym: string | null | undefined): string =>
+  !ym ? "" : ym.length === 6 ? `${ym.slice(0, 4)}.${ym.slice(4)}` : ym;
 
 /** 홈 대표 연구 — 최근 수상작 + 해외 주요 저널 */
 export const featuredIds = [58, 60, 62, 70, 41, 37];

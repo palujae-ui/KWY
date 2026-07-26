@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 const SECTIONS = [
   { key: "columns", label: "경제 인사이트 (칼럼)", desc: "내일신문 경제시평 등 기고", href: "/admin/columns", ready: true },
   { key: "videos", label: "방송·영상", desc: "유튜브 영상", href: "/admin/videos", ready: true },
-  { key: "profile", label: "프로필 · 소개", desc: "성함·소속·헤드라인·소개·연락처", ready: false },
+  { key: "profile", label: "프로필 · 소개", desc: "성함·소속·헤드라인·소개·연락처", href: "/admin/profile", ready: true },
   { key: "career", label: "약력", desc: "학력·근무경력·위원 활동", href: "/admin/career", ready: true },
   { key: "publications", label: "연구 (논문)", desc: "논문·보고서·수상", href: "/admin/publications", ready: true },
   { key: "media", label: "언론 인용·인터뷰", desc: "방송·신문 인용", href: "/admin/media", ready: true },

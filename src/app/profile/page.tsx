@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { profile } from "@/data/profile";
 import { trajectory } from "@/data/career";
-import { getEducation, getCareer } from "@/lib/content";
+import { getEducation, getCareer, getProfile } from "@/lib/content";
 import PageHero from "@/components/PageHero";
 import SectionTitle from "@/components/SectionTitle";
 
@@ -14,7 +13,11 @@ export const metadata: Metadata = {
 export const revalidate = 10;
 
 export default async function ProfilePage() {
-  const [education, career] = await Promise.all([getEducation(), getCareer()]);
+  const [education, career, profile] = await Promise.all([
+    getEducation(),
+    getCareer(),
+    getProfile(),
+  ]);
   return (
     <>
       <PageHero

@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { profile } from "@/data/profile";
 import { trajectory } from "@/data/career";
 import { policyActivities } from "@/data/insights";
-import { getPublications } from "@/lib/content";
+import { getPublications, getProfile } from "@/lib/content";
 import PubRow from "@/components/PubRow";
 import SectionTitle from "@/components/SectionTitle";
 import Portrait from "@/components/Portrait";
@@ -12,7 +11,10 @@ export const revalidate = 10;
 
 export default async function Home() {
   const tf = policyActivities[0];
-  const publications = await getPublications();
+  const [publications, profile] = await Promise.all([
+    getPublications(),
+    getProfile(),
+  ]);
 
   const featured = publications.filter((p) => p.featured).slice(0, 6);
 

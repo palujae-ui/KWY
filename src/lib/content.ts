@@ -20,6 +20,35 @@ import {
   type Education,
   type CareerItem,
 } from "@/data/career";
+import { profile as fallbackProfile } from "@/data/profile";
+
+export type ProfileData = {
+  nameKo: string;
+  nameEn: string;
+  nameHanja: string;
+  affiliation: string;
+  affiliationEn: string;
+  title: string;
+  tagline: string;
+  intro: string[];
+  contact: { email: string; phone: string; office: string };
+  researchAreas: { title: string; topic: string; desc: string }[];
+};
+
+function tsProfile(): ProfileData {
+  return {
+    nameKo: fallbackProfile.nameKo,
+    nameEn: fallbackProfile.nameEn,
+    nameHanja: fallbackProfile.nameHanja,
+    affiliation: fallbackProfile.affiliation,
+    affiliationEn: fallbackProfile.affiliationEn,
+    title: fallbackProfile.title,
+    tagline: fallbackProfile.tagline,
+    intro: [...fallbackProfile.intro],
+    contact: { ...fallbackProfile.contact },
+    researchAreas: fallbackProfile.researchAreas.map((a) => ({ ...a })),
+  };
+}
 
 /**
  * 공개 페이지용 데이터 조회 — anon 키(쿠키 없음) 클라이언트.
@@ -64,6 +93,37 @@ export async function getPublications(): Promise<Publication[]> {
     }));
   } catch {
     return fallbackPubs.map((p) => ({ ...p, featured: featuredIds.includes(p.id) }));
+  }
+}
+
+export async function getProfile(): Promise<ProfileData> {
+  try {
+    const { data, error } = await publicDb
+      .from("profile")
+      .select("*")
+      .eq("id", 1)
+      .maybeSingle();
+    if (error || !data) return tsProfile();
+    return {
+      nameKo: data.name_ko ?? fallbackProfile.nameKo,
+      nameEn: data.name_en ?? fallbackProfile.nameEn,
+      nameHanja: data.name_hanja ?? fallbackProfile.nameHanja,
+      affiliation: data.affiliation ?? fallbackProfile.affiliation,
+      affiliationEn: data.affiliation_en ?? fallbackProfile.affiliationEn,
+      title: data.title ?? fallbackProfile.title,
+      tagline: data.tagline ?? fallbackProfile.tagline,
+      intro: Array.isArray(data.intro) ? data.intro : [...fallbackProfile.intro],
+      contact: {
+        email: data.email ?? fallbackProfile.contact.email,
+        phone: data.phone ?? fallbackProfile.contact.phone,
+        office: data.office ?? fallbackProfile.contact.office,
+      },
+      researchAreas: Array.isArray(data.research_areas)
+        ? data.research_areas
+        : fallbackProfile.researchAreas.map((a) => ({ ...a })),
+    };
+  } catch {
+    return tsProfile();
   }
 }
 
