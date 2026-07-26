@@ -26,6 +26,8 @@ export type Publication = {
   topics: Topic[];
   /** 수상 논문일 경우 표기 */
   award?: string;
+  /** 홈 '대표 연구' 노출 여부 */
+  featured?: boolean;
 };
 
 export const publications: Publication[] = [

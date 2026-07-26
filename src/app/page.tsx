@@ -1,31 +1,32 @@
 import Link from "next/link";
 import { profile } from "@/data/profile";
 import { trajectory } from "@/data/career";
-import { publications, featuredIds } from "@/data/publications";
 import { policyActivities } from "@/data/insights";
+import { getPublications } from "@/lib/content";
 import PubRow from "@/components/PubRow";
 import SectionTitle from "@/components/SectionTitle";
 import Portrait from "@/components/Portrait";
 
-const featured = featuredIds
-  .map((id) => publications.find((p) => p.id === id))
-  .filter((p) => p !== undefined);
+// 논문 수·대표 연구를 DB에서 읽으므로 관리자 저장 후 반영.
+export const revalidate = 10;
 
-const stats = [
-  { value: publications.length, unit: "편", label: "논문 · 보고서", color: "from-blue-500 to-blue-600", bg: "bg-blue-50 text-blue-700 border-blue-200/60" },
-  { value: 34, unit: "년", label: "연구 경력", color: "from-emerald-500 to-emerald-600", bg: "bg-emerald-50 text-emerald-700 border-emerald-200/60" },
-  { value: trajectory.length, unit: "곳", label: "재직 기관", color: "from-amber-500 to-amber-600", bg: "bg-amber-50 text-amber-700 border-amber-200/60" },
-  {
-    value: publications.filter((p) => p.type === "해외저널").length,
-    unit: "편",
-    label: "해외 저널 게재",
-    color: "from-indigo-500 to-indigo-600",
-    bg: "bg-indigo-50 text-indigo-700 border-indigo-200/60",
-  },
-];
-
-export default function Home() {
+export default async function Home() {
   const tf = policyActivities[0];
+  const publications = await getPublications();
+
+  const featured = publications.filter((p) => p.featured).slice(0, 6);
+
+  const stats = [
+    { value: publications.length, unit: "편", label: "논문 · 보고서", bg: "bg-blue-50 text-blue-700 border-blue-200/60" },
+    { value: 34, unit: "년", label: "연구 경력", bg: "bg-emerald-50 text-emerald-700 border-emerald-200/60" },
+    { value: trajectory.length, unit: "곳", label: "재직 기관", bg: "bg-amber-50 text-amber-700 border-amber-200/60" },
+    {
+      value: publications.filter((p) => p.type === "해외저널").length,
+      unit: "편",
+      label: "해외 저널 게재",
+      bg: "bg-indigo-50 text-indigo-700 border-indigo-200/60",
+    },
+  ];
 
   return (
     <>

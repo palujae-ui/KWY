@@ -2,16 +2,20 @@
 
 import { useMemo, useState } from "react";
 import {
-  publications,
   ALL_TOPICS,
   ALL_TYPES,
   ymNum,
+  type Publication,
   type PubType,
   type Topic,
 } from "@/data/publications";
 import PubRow from "@/components/PubRow";
 
-export default function ResearchList() {
+export default function ResearchList({
+  publications,
+}: {
+  publications: Publication[];
+}) {
   const [topic, setTopic] = useState<Topic | null>(null);
   const [type, setType] = useState<PubType | null>(null);
 
