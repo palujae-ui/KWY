@@ -36,9 +36,9 @@ export default function VideoEmbed({ video }: { video: VideoItem }) {
             aria-label={`${video.title} 재생`}
             className="group absolute inset-0 w-full h-full"
           >
-            {/* 썸네일 (로컬 보관본) */}
+            {/* 썸네일 — 유튜브 CDN(어떤 영상이든 자동 표시). 관리자가 추가한 새 영상도 바로 노출됨. */}
             <img
-              src={`/video-thumbs/${video.youtubeId}.jpg`}
+              src={`https://i.ytimg.com/vi/${video.youtubeId}/hqdefault.jpg`}
               alt=""
               className="absolute inset-0 w-full h-full object-cover"
               loading="lazy"

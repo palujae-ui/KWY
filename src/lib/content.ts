@@ -1,5 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
-import { columns as fallbackColumns, type Column } from "@/data/insights";
+import {
+  columns as fallbackColumns,
+  videos as fallbackVideos,
+  type Column,
+  type VideoItem,
+} from "@/data/insights";
 
 /**
  * 공개 페이지용 데이터 조회 — anon 키(쿠키 없음) 클라이언트.
@@ -20,5 +25,26 @@ export async function getColumns(): Promise<Column[]> {
     return data as Column[];
   } catch {
     return fallbackColumns;
+  }
+}
+
+export async function getVideos(): Promise<VideoItem[]> {
+  try {
+    const { data, error } = await publicDb
+      .from("videos")
+      .select("youtube_id, title, channel, date, start_seconds, note, related_topic")
+      .order("sort_order", { ascending: true });
+    if (error || !data || data.length === 0) return fallbackVideos;
+    return data.map((r) => ({
+      youtubeId: r.youtube_id,
+      title: r.title,
+      channel: r.channel,
+      date: r.date ?? undefined,
+      startSeconds: r.start_seconds ?? undefined,
+      note: r.note ?? undefined,
+      relatedTopic: r.related_topic ?? undefined,
+    }));
+  } catch {
+    return fallbackVideos;
   }
 }

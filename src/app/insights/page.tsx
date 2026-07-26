@@ -4,9 +4,8 @@ import {
   editorships,
   books,
   mediaAppearances,
-  videos,
 } from "@/data/insights";
-import { getColumns } from "@/lib/content";
+import { getColumns, getVideos } from "@/lib/content";
 import PageHero from "@/components/PageHero";
 import SectionTitle from "@/components/SectionTitle";
 import VideoEmbed from "@/components/VideoEmbed";
@@ -21,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 export default async function InsightsPage() {
-  const columns = await getColumns();
+  const [columns, videos] = await Promise.all([getColumns(), getVideos()]);
   return (
     <>
       <PageHero
