@@ -2,8 +2,10 @@ import { createClient } from "@supabase/supabase-js";
 import {
   columns as fallbackColumns,
   videos as fallbackVideos,
+  mediaAppearances as fallbackMedia,
   type Column,
   type VideoItem,
+  type MediaAppearance,
 } from "@/data/insights";
 
 /**
@@ -25,6 +27,28 @@ export async function getColumns(): Promise<Column[]> {
     return data as Column[];
   } catch {
     return fallbackColumns;
+  }
+}
+
+export async function getMedia(): Promise<MediaAppearance[]> {
+  try {
+    const { data, error } = await publicDb
+      .from("media_appearances")
+      .select("headline, outlet, reporter, date, url, context, quotes, related_topic")
+      .order("sort_order", { ascending: true });
+    if (error || !data || data.length === 0) return fallbackMedia;
+    return data.map((r) => ({
+      headline: r.headline,
+      outlet: r.outlet,
+      reporter: r.reporter ?? undefined,
+      date: r.date,
+      url: r.url,
+      context: r.context,
+      quotes: Array.isArray(r.quotes) ? (r.quotes as string[]) : [],
+      relatedTopic: r.related_topic ?? undefined,
+    }));
+  } catch {
+    return fallbackMedia;
   }
 }
 
