@@ -212,8 +212,8 @@ export const videos: VideoItem[] = [
     youtubeId: "htKh-hbzqhU",
     title: "제4회 한국의 사회동향 포럼 — 유경원 교수 발표",
     channel: "KOSSDA 한국사회과학자료원",
-    startSeconds: 3600,
-    note: "발표는 영상 1시간(1:00:00) 지점부터 시작됩니다.",
+    startSeconds: 3575,
+    note: "발표는 영상 59분 35초(59:35) 지점부터 시작됩니다.",
     relatedTopic: "사회동향 · 소득분배",
   },
 ];
