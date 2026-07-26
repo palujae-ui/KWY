@@ -7,7 +7,7 @@ import BackToTop from "@/components/BackToTop";
 export const metadata: Metadata = {
   title: "연구",
   description:
-    "유경원 교수의 논문·보고서 55편. 가계부채, 가계저축, 인구고령화, 서민금융·신용평가, 소득분배 분야.",
+    "유경원 교수의 논문·보고서. 가계부채, 가계저축, 인구고령화, 서민금융·신용평가, 소득분배 분야.",
 };
 
 export default function ResearchPage() {

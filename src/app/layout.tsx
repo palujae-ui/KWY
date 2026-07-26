@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: "%s | 유경원",
   },
   description:
-    "유경원(Kyeongwon Yoo) 상명대학교 경영경제대학 경제금융학부 교수. 가계부채·가계저축·인구고령화·서민금융 연구. KDI, 한국은행, 보험연구원을 거쳐 논문 55편 발표.",
+    "유경원(Kyeongwon Yoo) 상명대학교 경영경제대학 경제금융학부 교수. 가계부채·가계저축·인구고령화·서민금융 연구. KDI, 한국은행, 보험연구원을 거쳐 다수 논문 발표.",
   keywords: [
     "유경원",
     "Kyeongwon Yoo",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "유경원 | 상명대학교 경제금융학부",
     description:
-      "가계부채·가계저축·인구고령화·서민금융 연구. 논문 55편. 금융위원회 신용평가체계 개편 T/F 위원.",
+      "가계부채·가계저축·인구고령화·서민금융 연구. 금융위원회 신용평가체계 개편 T/F 위원·새출발기금 심사위원장.",
     type: "profile",
     locale: "ko_KR",
   },

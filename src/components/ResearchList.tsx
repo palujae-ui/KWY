@@ -5,7 +5,7 @@ import {
   publications,
   ALL_TOPICS,
   ALL_TYPES,
-  yearOf,
+  ymNum,
   type PubType,
   type Topic,
 } from "@/data/publications";
@@ -19,7 +19,7 @@ export default function ResearchList() {
     return publications
       .filter((p) => (topic ? p.topics.includes(topic) : true))
       .filter((p) => (type ? p.type === type : true))
-      .sort((a, b) => yearOf(b.ym) - yearOf(a.ym) || b.id - a.id);
+      .sort((a, b) => ymNum(b.ym) - ymNum(a.ym) || b.id - a.id);
   }, [topic, type]);
 
   // 모바일 탭 타깃 최소 44px 확보 (데스크톱에서는 기존 높이 유지)

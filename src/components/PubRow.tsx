@@ -34,6 +34,11 @@ export default function PubRow({
                 #{t}
               </span>
             ))}
+            {pub.award && (
+              <span className="text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-200/80 px-2 py-0.5 rounded-md">
+                🏆 {pub.award}
+              </span>
+            )}
           </div>
 
           <h3 className="font-bold text-base md:text-[1.08rem] leading-snug text-slate-900 group-hover:text-blue-600 transition-colors">

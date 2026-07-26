@@ -1,6 +1,7 @@
 /**
- * 논문 · 보고서 55편
- * 출처: 상명대학교 경제금융학부 교수진 페이지 (제목·게재지·연월 원문 그대로)
+ * 논문 · 보고서
+ * 출처: 유경원 교수 이력서(2026.07) — 최근 논문(2019~2026)까지 포함.
+ *        id 1~55는 학부 페이지 기준(~2018), id 56~는 CV 기준 최신분.
  * 영문 제목/저널명은 번역하지 않고 원문 유지.
  */
 
@@ -23,9 +24,36 @@ export type Publication = {
   ym: string;
   type: PubType;
   topics: Topic[];
+  /** 수상 논문일 경우 표기 */
+  award?: string;
 };
 
 export const publications: Publication[] = [
+  // ── 최신분 (CV 2026.07 기준, 2019~2026) ──
+  { id: 56, title: "중소기업 정책금융의 연체 및 졸업 결정요인 분석", venue: "예산정책연구", ym: "202606", type: "국내저널", topics: ["서민금융·신용", "산업·기타"] },
+  { id: 57, title: "자산매입 후 임대 프로그램과 중소기업 성과지표의 연관성 분석: 지원규모의 역할을 중심으로", venue: "중소기업금융연구", ym: "202512", type: "국내저널", topics: ["서민금융·신용", "산업·기타"] },
+  { id: 58, title: "가계부채 규제가 금융안정성과 소득분배에 미치는 영향", venue: "소비자학연구", ym: "202412", type: "국내저널", topics: ["가계부채", "소득분배"], award: "한국소비자학회 우수논문상" },
+  { id: 59, title: "민간신용과 소득분배 관계에 관한 실증연구: 가계부채와 소득 불평등 관계를 중심으로", venue: "미래성장연구", ym: "202412", type: "국내저널", topics: ["가계부채", "소득분배"] },
+  { id: 60, title: "디지털 금융확산의 영향과 디지털 금융소외 원인 분석", venue: "소비자정책교육연구", ym: "202409", type: "국내저널", topics: ["서민금융·신용"], award: "소비자정책교육학회 최우수논문상" },
+  { id: 61, title: "가계부채 관련 규제가 은행 대출행태에 미치는 영향 분석", venue: "보험금융연구", ym: "202409", type: "국내저널", topics: ["가계부채", "통화·금융정책"] },
+  { id: 62, title: "위험회피도와 금리민감도가 금융소비자의 의사결정에 미치는 영향", venue: "Financial Planning Review", ym: "202402", type: "국내저널", topics: ["가계저축·자산"], award: "한국FP학회 우수논문상" },
+  { id: 63, title: "세대간 소득·자산 불평등 추이: 20~30대 청년세대를 중심으로", venue: "한국의 사회동향 2023 (통계개발원)", ym: "202312", type: "보고서", topics: ["소득분배"] },
+  { id: 64, title: "공적개발원조(ODA)와 해외직접투자(FDI)가 개도국 경제성장에 미치는 영향에 대한 실증연구", venue: "국제개발협력연구", ym: "202212", type: "국내저널", topics: ["산업·기타"] },
+  { id: 65, title: "은행 지점망 축소의 영향과 금융소외 발생원인에 관한 실증연구", venue: "소비자정책교육연구", ym: "202212", type: "국내저널", topics: ["서민금융·신용"], award: "소비자정책교육학회 우수논문상" },
+  { id: 66, title: "인터넷 검색자료를 이용한 가계대출 수요의 분석", venue: "소비자정책교육연구", ym: "202203", type: "국내저널", topics: ["가계부채"] },
+  { id: 67, title: "코로나19 확산 전후 소득불평등의 변화", venue: "한국의 사회동향 2021 (통계개발원)", ym: "202112", type: "보고서", topics: ["소득분배"] },
+  { id: 68, title: "포털 검색어 자료를 이용한 개인파산 판단지표의 개발", venue: "소비자정책교육연구", ym: "202109", type: "국내저널", topics: ["서민금융·신용"] },
+  { id: 69, title: "부채의 유입과 유출을 이용한 가계부채 변화요인과 영향 연구: 차주별 신용패널 데이터를 중심으로", venue: "보험금융연구", ym: "202105", type: "국내저널", topics: ["가계부채"] },
+  { id: 70, title: "Is Imitation Bad for the Production of Creative Works?", venue: "Review of Network Economics", ym: "202101", type: "해외저널", topics: ["산업·기타"] },
+  { id: 71, title: "과거 경제위기와 코로나19 확산기의 소비지출 패턴 비교", venue: "한국의 사회동향 2020 (통계개발원)", ym: "202012", type: "보고서", topics: ["가계저축·자산"] },
+  { id: 72, title: "중·고령자가구의 은퇴전후 자산보유 행태 분석", venue: "소비자정책교육연구", ym: "202012", type: "국내저널", topics: ["고령화·연금", "가계저축·자산"] },
+  { id: 73, title: "Financial Inclusion Through Fintech in the Digital Economy", venue: "APEC Study Series 20-03, KIEP", ym: "2020", type: "보고서", topics: ["서민금융·신용"] },
+  { id: 74, title: "빅데이터를 활용한 개인회생 및 개인파산 실적 예측", venue: "소비자학연구", ym: "202003", type: "국내저널", topics: ["서민금융·신용"] },
+  { id: 75, title: "The Utility of Information Security Training and Education on Cybersecurity Incidents: An Empirical Evidence", venue: "Information Systems Frontiers", ym: "201912", type: "해외저널", topics: ["산업·기타"] },
+  { id: 76, title: "지역별 상속의향 차이에 관한 연구", venue: "서울도시연구", ym: "201903", type: "국내저널", topics: ["소득분배", "가계저축·자산"] },
+  { id: 77, title: "인구구조 고령화의 가계경제 영향 (『고령화가 공적연금과 국민경제에 미치는 영향: 한국과 일본 비교연구』 제4장)", venue: "국민연금연구원", ym: "201812", type: "보고서", topics: ["고령화·연금"] },
+
+  // ── 학부 페이지 기준 (~2018) ──
   { id: 1, title: "The Effect of Piracy and Digital Rights Management on Vertically Related Content Industries", venue: "Review of Network Economics", ym: "201806", type: "해외저널", topics: ["산업·기타"] },
   { id: 2, title: "CCR-CUSUM 검정을 활용한 이자율기간구조에 대한 실증분석", venue: "금융연구", ym: "201803", type: "국내저널", topics: ["통화·금융정책"] },
   { id: 3, title: "우리나라 가계의 동태적 부채보유 행태에 대한 분석", venue: "통계연구", ym: "201712", type: "국내저널", topics: ["가계부채"] },
@@ -98,9 +126,13 @@ export const ALL_TYPES: PubType[] = ["해외저널", "국내저널", "보고서"
 /** "201803" → 2018 */
 export const yearOf = (ym: string): number => Number(ym.slice(0, 4));
 
+/** 정렬용 숫자 키 — "201803" → 201803, "2014"(연도만) → 201400 (연·월 모두 반영) */
+export const ymNum = (ym: string): number =>
+  Number(ym.length >= 6 ? ym.slice(0, 6) : ym.slice(0, 4) + "00");
+
 /** "201803" → "2018.03", "2014" → "2014" */
 export const formatYm = (ym: string): string =>
   ym.length === 6 ? `${ym.slice(0, 4)}.${ym.slice(4)}` : ym;
 
-/** 홈 대표 연구 — 해외 주요 저널 + 대표 국내 논문 */
-export const featuredIds = [41, 37, 14, 1, 16, 3];
+/** 홈 대표 연구 — 최근 수상작 + 해외 주요 저널 */
+export const featuredIds = [58, 60, 62, 70, 41, 37];

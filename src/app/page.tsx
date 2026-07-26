@@ -197,21 +197,26 @@ export default function Home() {
             desc="미시 가구 패널 자료를 이용한 실증분석을 중심으로, 가계의 부채·저축 행태와 그 정책적 함의를 연구해 왔습니다."
           />
           <div className="grid gap-4 md:grid-cols-2">
-            {profile.researchAreas.map((a) => (
+            {profile.researchAreas.map((a) => {
+              const count = publications.filter((p) =>
+                (p.topics as readonly string[]).includes(a.topic)
+              ).length;
+              return (
               <article key={a.title} className="bg-white rounded-2xl p-7 border border-slate-200/80 shadow-xs hover:border-blue-300 hover:shadow-md transition-all duration-200">
                 <div className="flex items-center justify-between gap-4">
                   <h3 className="font-bold text-lg text-slate-900">
                     {a.title}
                   </h3>
                   <span className="num text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200/60 px-3 py-1 rounded-full shrink-0">
-                    {a.count}편
+                    {count}편
                   </span>
                 </div>
                 <p className="text-sm text-slate-600 mt-3 leading-relaxed">
                   {a.desc}
                 </p>
               </article>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

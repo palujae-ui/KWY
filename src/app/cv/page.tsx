@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { profile } from "@/data/profile";
 import { career, education } from "@/data/career";
-import { publications, formatYm, yearOf } from "@/data/publications";
+import { publications, formatYm, ymNum } from "@/data/publications";
 import { books } from "@/data/insights";
 import PrintButton from "@/components/PrintButton";
 import Portrait from "@/components/Portrait";
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 const sorted = [...publications].sort(
-  (a, b) => yearOf(b.ym) - yearOf(a.ym) || b.id - a.id
+  (a, b) => ymNum(b.ym) - ymNum(a.ym) || b.id - a.id
 );
 
 function Rule({ children }: { children: string }) {
