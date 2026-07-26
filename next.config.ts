@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // 백엔드 없음 — 순수 정적 사이트. next build 시 out/ 에 HTML/CSS/JS 만 생성된다.
-  output: "export",
+  // Phase 2: 정적 export를 끄고 서버 렌더링 앱으로 전환(Vercel 배포).
+  // 관리자(admin) 로그인·저장 기능과 Supabase 연동을 위해 서버가 필요하다.
   images: { unoptimized: true },
   trailingSlash: true,
 };
