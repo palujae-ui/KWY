@@ -6,7 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { adminIdToEmail } from "@/lib/admin";
 
 const inputCls =
-  "w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10";
+  "w-full px-4 py-3 rounded-xl border-2 border-slate-400 bg-white text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10";
 
 export default function AdminLoginPage() {
   const router = useRouter();

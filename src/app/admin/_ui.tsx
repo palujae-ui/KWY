@@ -8,7 +8,7 @@ import LogoutButton from "./LogoutButton";
 
 export const ui = {
   input:
-    "w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10",
+    "w-full px-3.5 py-2.5 rounded-xl border-2 border-slate-400 bg-white text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10",
   label: "block text-[13px] font-semibold text-slate-700 mb-1.5",
   hint: "text-[11px] text-slate-400 mt-1",
   btn: "inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold shadow-sm shadow-blue-600/25 transition hover:bg-blue-700 hover:-translate-y-px active:translate-y-0",
