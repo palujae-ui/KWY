@@ -54,14 +54,22 @@ function tsProfile(): ProfileData {
  * 공개 페이지용 데이터 조회 — anon 키(쿠키 없음) 클라이언트.
  * RLS로 읽기만 가능. DB 오류/빈 결과 시 기존 TS 데이터로 폴백(안전).
  */
-const publicDb = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+// 환경변수가 없으면(예: 빌드 환경 미설정) 클라이언트를 만들지 않는다.
+// 모듈 로드 시점에 throw 하면 빌드가 통째로 실패하므로, null 로 두고 각 getX가 폴백한다.
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const publicDb =
+  supabaseUrl && supabaseAnon ? createClient(supabaseUrl, supabaseAnon) : null;
+
+/** 클라이언트를 반환하거나, 환경변수가 없으면 throw → 각 getX의 try/catch가 폴백 데이터를 반환 */
+function requireDb() {
+  if (!publicDb) throw new Error("Supabase 환경변수 미설정 — 폴백 데이터 사용");
+  return publicDb;
+}
 
 export async function getColumns(): Promise<Column[]> {
   try {
-    const { data, error } = await publicDb
+    const { data, error } = await requireDb()
       .from("columns")
       .select("title, outlet, date, url")
       .order("sort_order", { ascending: true });
@@ -74,7 +82,7 @@ export async function getColumns(): Promise<Column[]> {
 
 export async function getPublications(): Promise<Publication[]> {
   try {
-    const { data, error } = await publicDb
+    const { data, error } = await requireDb()
       .from("publications")
       .select("id, title, venue, ym, type, topics, award, featured")
       .order("sort_order", { ascending: true });
@@ -98,7 +106,7 @@ export async function getPublications(): Promise<Publication[]> {
 
 export async function getProfile(): Promise<ProfileData> {
   try {
-    const { data, error } = await publicDb
+    const { data, error } = await requireDb()
       .from("profile")
       .select("*")
       .eq("id", 1)
@@ -129,7 +137,7 @@ export async function getProfile(): Promise<ProfileData> {
 
 export async function getEducation(): Promise<Education[]> {
   try {
-    const { data, error } = await publicDb
+    const { data, error } = await requireDb()
       .from("education")
       .select("degree, field, school, ym, note")
       .order("sort_order", { ascending: true });
@@ -148,7 +156,7 @@ export async function getEducation(): Promise<Education[]> {
 
 export async function getCareer(): Promise<CareerItem[]> {
   try {
-    const { data, error } = await publicDb
+    const { data, error } = await requireDb()
       .from("career")
       .select("role, org, from_period, to_period, is_primary")
       .order("sort_order", { ascending: true });
@@ -167,7 +175,7 @@ export async function getCareer(): Promise<CareerItem[]> {
 
 export async function getMedia(): Promise<MediaAppearance[]> {
   try {
-    const { data, error } = await publicDb
+    const { data, error } = await requireDb()
       .from("media_appearances")
       .select("headline, outlet, reporter, date, url, context, quotes, related_topic")
       .order("sort_order", { ascending: true });
@@ -189,7 +197,7 @@ export async function getMedia(): Promise<MediaAppearance[]> {
 
 export async function getVideos(): Promise<VideoItem[]> {
   try {
-    const { data, error } = await publicDb
+    const { data, error } = await requireDb()
       .from("videos")
       .select("youtube_id, title, channel, date, start_seconds, note, related_topic")
       .order("sort_order", { ascending: true });
