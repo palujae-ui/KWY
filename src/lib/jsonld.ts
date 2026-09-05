@@ -15,9 +15,18 @@ export const PERSON_ID = `${SITE_URL}/#person`;
 export const SITE_ID = `${SITE_URL}/#website`;
 export const ORG_ID = `${SITE_URL}/#organization`;
 
-/** 상명대 학부 공식 프로필 — 현재 확인된 유일한 외부 신원 링크 */
-const FACULTY_PAGE =
-  "https://kcge.smu.ac.kr/sbe/info/faculty01.do?mode=view&empNo=10126915";
+/**
+ * 확인된 외부 신원 링크(sameAs).
+ * 두 곳 모두 상명대 공식 페이지이며 같은 교번(empNo=10126915)을 가리킨다.
+ * 목록 페이징 파라미터(pager.offset 등)는 신원과 무관하므로 제거했다.
+ */
+export const FACULTY_PAGE =
+  "https://econo.smu.ac.kr/economic/faculty/faculty.do?mode=view&empNo=10126915";
+
+const SAME_AS = [
+  FACULTY_PAGE, // 경제금융학부(서울) 교수소개
+  "https://kcge.smu.ac.kr/sbe/info/faculty01.do?mode=view&empNo=10126915", // 경영경제대학(서울) 교수소개
+];
 
 /** "2010.09" → "2010-09" (schema.org 는 ISO 8601 을 기대한다) */
 function toIsoMonth(ym: string): string {
@@ -90,7 +99,7 @@ export function personSchema() {
       memberOf: { "@type": "Organization", name: c.org },
     })),
     award: awards,
-    sameAs: [FACULTY_PAGE],
+    sameAs: SAME_AS,
   };
 }
 

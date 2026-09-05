@@ -59,6 +59,11 @@ ${recent.map((p) => `- ${p.title} — ${p.venue}, ${p.ym.slice(0, 4)}${p.award ?
 
 ${faq.map((f) => `### ${f.q}\n\n${f.a}`).join("\n\n")}
 
+## 공식 외부 프로필
+
+- 상명대학교 경제금융학부(서울) 교수소개: https://econo.smu.ac.kr/economic/faculty/faculty.do?mode=view&empNo=10126915
+- 상명대학교 경영경제대학(서울) 교수소개: https://kcge.smu.ac.kr/sbe/info/faculty01.do?mode=view&empNo=10126915
+
 ## 페이지
 
 - [홈](${SITE_URL}/): 소개, 대표 연구, 정책 활동 요약

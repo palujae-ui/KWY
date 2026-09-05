@@ -1,4 +1,5 @@
 import { profile } from "@/data/profile";
+import { FACULTY_PAGE } from "@/lib/jsonld";
 
 export default function Footer() {
   return (
@@ -40,7 +41,7 @@ export default function Footer() {
         <div className="mt-12 pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4 text-[13px] text-slate-400">
           <span>© {new Date().getFullYear()} Kyeongwon Yoo. All rights reserved.</span>
           <a
-            href="https://kcge.smu.ac.kr/sbe/info/faculty01.do?mode=view&empNo=10126915"
+            href={FACULTY_PAGE}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-1.5 min-h-11 md:min-h-0 px-4 py-2.5 md:py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"
