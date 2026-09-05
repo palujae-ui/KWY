@@ -70,22 +70,25 @@ export default async function InsightsPage() {
                   </blockquote>
                 )}
 
-                <p className="mt-6 text-xs text-slate-500 font-medium">
-                  출처{" "}
-                  {a.source.url ? (
-                    <a
-                      href={a.source.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center min-h-11 md:min-h-0 text-blue-600 hover:underline font-semibold ml-1"
-                    >
-                      {a.source.label} ↗
-                    </a>
-                  ) : (
-                    <span className="text-slate-600 font-semibold ml-1">
-                      {a.source.label}
+                <p className="mt-6 text-xs text-slate-500 font-medium flex flex-wrap items-center gap-x-1 gap-y-1">
+                  <span>출처</span>
+                  {a.sources.map((s, i) => (
+                    <span key={s.label} className="inline-flex items-center">
+                      {i > 0 && <span className="text-slate-300 mr-1">·</span>}
+                      {s.url ? (
+                        <a
+                          href={s.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center min-h-11 md:min-h-0 text-blue-600 hover:underline font-semibold"
+                        >
+                          {s.label} ↗
+                        </a>
+                      ) : (
+                        <span className="text-slate-600 font-semibold">{s.label}</span>
+                      )}
                     </span>
-                  )}
+                  ))}
                 </p>
               </article>
             ))}
