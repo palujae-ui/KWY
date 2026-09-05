@@ -209,9 +209,13 @@ export function breadcrumbSchema(trail: { name: string; path: string }[]) {
  * 정책·기고 페이지 — 연재 칼럼을 원문 URL과 함께 노출한다.
  * 칼럼 본문은 언론사 사이트에 있으므로 url 로 1차 출처를 가리키고 저자만 명시한다.
  */
-/** 매체가 언론사인지 — 연구기관 논단과 신문 칼럼을 스키마에서 구분하기 위함 */
+/**
+ * 매체가 언론사인지 — 연구기관 논단과 신문 칼럼을 스키마에서 구분하기 위함.
+ * "신문"이 들어가는지로 판별하면 서울경제·한국경제 같은 매체를 놓치므로,
+ * 연구기관 쪽을 예외로 두고 나머지를 언론사로 본다.
+ */
 function isNews(outlet: string): boolean {
-  return outlet.includes("신문");
+  return !/연구소|연구원|진흥원/.test(outlet);
 }
 
 export function insightsSchema(

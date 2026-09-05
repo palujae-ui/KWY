@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { policyActivities, editorships, books, instituteEssays } from "@/data/insights";
+import {
+  policyActivities,
+  editorships,
+  books,
+  instituteEssays,
+  extraColumns,
+} from "@/data/insights";
 import { getColumns, getVideos, getMedia } from "@/lib/content";
 import PageHero from "@/components/PageHero";
 import SectionTitle from "@/components/SectionTitle";
@@ -18,11 +24,18 @@ export const metadata: Metadata = {
 };
 
 export default async function InsightsPage() {
-  const [columns, videos, mediaAppearances] = await Promise.all([
+  const [dbColumns, videos, mediaAppearances] = await Promise.all([
     getColumns(),
     getVideos(),
     getMedia(),
   ]);
+
+  // 관리자(DB) 칼럼 + 코드에만 있는 타 매체 기고. URL 로 중복 제거하고 최신순 정렬.
+  const seen = new Set(dbColumns.map((c) => c.url).filter(Boolean));
+  const columns = [
+    ...dbColumns,
+    ...extraColumns.filter((c) => !seen.has(c.url)),
+  ].sort((a, b) => b.date.localeCompare(a.date));
   return (
     <>
       <PageHero
@@ -103,7 +116,7 @@ export default async function InsightsPage() {
             <SectionTitle
               kicker="Economic Insight"
               title="경제 인사이트"
-              desc="유경원 교수는 2020년부터 내일신문(석간) 「경제시평」에 매달 경제 칼럼을 연재하고 있습니다. 제목을 누르면 원문으로 이동합니다."
+              desc="유경원 교수는 2020년부터 내일신문(석간) 「경제시평」에 매달 경제 칼럼을 연재하고 있으며, 서울경제 등 다른 매체에도 기고합니다. 제목을 누르면 원문으로 이동합니다."
             />
             <ol className="grid gap-3 md:grid-cols-2">
               {columns.map((c) => (
