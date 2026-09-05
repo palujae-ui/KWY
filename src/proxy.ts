@@ -57,5 +57,5 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   // 정적 파일·이미지·public 자산 제외하고 모든 경로에서 실행(세션 갱신)
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:jpg|jpeg|png|webp|svg|gif|ico)$).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:jpg|jpeg|png|webp|svg|gif|ico|html|xml|txt|pdf)$).*)"],
 };

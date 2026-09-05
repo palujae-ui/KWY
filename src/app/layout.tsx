@@ -19,6 +19,11 @@ export const metadata: Metadata = {
     "서민금융",
     "신용평가",
   ],
+  verification: {
+    other: {
+      "naver-site-verification": "93fe6f68bd93a44244068741751c7ae8",
+    },
+  },
   openGraph: {
     title: "유경원 | 상명대학교 경제금융학부",
     description:
