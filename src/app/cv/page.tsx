@@ -8,6 +8,7 @@ import Portrait from "@/components/Portrait";
 export const metadata: Metadata = {
   title: "CV",
   description: "유경원 교수 이력서 (Curriculum Vitae) — 학력, 경력, 논문.",
+  alternates: { canonical: "/cv/" },
 };
 
 export const revalidate = 10;

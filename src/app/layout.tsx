@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SiteChrome from "@/components/SiteChrome";
 import { SITE_URL } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import { personSchema, organizationSchema, websiteSchema } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -49,6 +51,8 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-slate-50 text-slate-700 font-sans selection:bg-blue-600 selection:text-white">
+        {/* 사이트 전역 엔티티: 인물·소속·사이트. 페이지별 스키마는 각 page.tsx 에서 @id 로 참조한다. */}
+        <JsonLd data={[personSchema(), organizationSchema(), websiteSchema()]} />
         <SiteChrome>{children}</SiteChrome>
       </body>
     </html>

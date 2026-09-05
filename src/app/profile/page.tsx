@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { trajectory } from "@/data/career";
-import { getEducation, getCareer, getProfile } from "@/lib/content";
+import { getEducation, getCareer, getProfile, getPublications } from "@/lib/content";
+import Faq from "@/components/Faq";
+import JsonLd from "@/components/JsonLd";
+import { buildFaq } from "@/data/faq";
+import { profilePageSchema, faqSchema, breadcrumbSchema } from "@/lib/jsonld";
 import PageHero from "@/components/PageHero";
 import SectionTitle from "@/components/SectionTitle";
 
@@ -8,16 +12,23 @@ export const metadata: Metadata = {
   title: "약력",
   description:
     "유경원 교수의 학력과 경력. 한국개발연구원(KDI), 한국은행, 보험연구원을 거쳐 상명대학교 경제금융학부 재직.",
+  alternates: { canonical: "/profile/" },
 };
 
 export const revalidate = 10;
 
 export default async function ProfilePage() {
-  const [education, career, profile] = await Promise.all([
+  const [education, career, profile, publications] = await Promise.all([
     getEducation(),
     getCareer(),
     getProfile(),
+    getPublications(),
   ]);
+
+  const faq = buildFaq(
+    publications.length,
+    publications.filter((p) => p.type === "해외저널").length
+  );
   return (
     <>
       <PageHero
@@ -152,6 +163,19 @@ export default async function ProfilePage() {
           </dl>
         </div>
       </section>
+
+      <Faq items={faq} />
+
+      <JsonLd
+        data={[
+          profilePageSchema(),
+          faqSchema(faq),
+          breadcrumbSchema([
+            { name: "홈", path: "/" },
+            { name: "약력", path: "/profile/" },
+          ]),
+        ]}
+      />
     </>
   );
 }

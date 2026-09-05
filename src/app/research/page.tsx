@@ -3,11 +3,14 @@ import { getPublications } from "@/lib/content";
 import PageHero from "@/components/PageHero";
 import ResearchList from "@/components/ResearchList";
 import BackToTop from "@/components/BackToTop";
+import JsonLd from "@/components/JsonLd";
+import { researchListSchema, breadcrumbSchema } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
   title: "연구",
   description:
     "유경원 교수의 논문·보고서. 가계부채, 가계저축, 인구고령화, 서민금융·신용평가, 소득분배 분야.",
+  alternates: { canonical: "/research/" },
 };
 
 // 논문은 DB에서 읽으므로 관리자 저장 후 반영(저장 시 즉시 revalidate).
@@ -29,6 +32,16 @@ export default async function ResearchPage() {
         </div>
       </section>
       <BackToTop />
+
+      <JsonLd
+        data={[
+          researchListSchema(publications),
+          breadcrumbSchema([
+            { name: "홈", path: "/" },
+            { name: "연구", path: "/research/" },
+          ]),
+        ]}
+      />
     </>
   );
 }
