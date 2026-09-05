@@ -109,6 +109,29 @@ export const columns: Column[] = [
 ];
 
 /**
+ * 연구기관 기고 — 하나금융연구소 「논단」
+ * 하나금융연구소가 외부 전문가에게 청탁하는 논단 지면. 2012~2022년 7편.
+ * 출처: 하나금융연구소 보고서 페이지(저자·게재일 원문 확인).
+ * ※ 요약문은 연구소 저작물이므로 옮기지 않고 제목·게재일·원문 링크만 둔다.
+ */
+export type InstituteEssay = {
+  title: string;
+  outlet: string;
+  date: string; // YYYY.MM.DD
+  url: string;
+};
+
+export const instituteEssays: InstituteEssay[] = [
+  { title: "최근 ‘빚 탕감’ 논란과 시사점", outlet: "하나금융연구소 「논단」", date: "2022.08.05", url: "https://www.hanaif.re.kr/boardDetail.do?hmpeSeqNo=35265" },
+  { title: "주택금융정책의 딜레마", outlet: "하나금융연구소 「논단」", date: "2021.07.05", url: "https://www.hanaif.re.kr/boardDetail.do?hmpeSeqNo=34858" },
+  { title: "코로나19와 ‘부채경제’ 시대의 도래", outlet: "하나금융연구소 「논단」", date: "2020.06.05", url: "https://www.hanaif.re.kr/boardDetail.do?hmpeSeqNo=34432" },
+  { title: "한일 고령화의 가계부문 리스크 요인과 대응", outlet: "하나금융연구소 「논단」", date: "2018.10.22", url: "https://www.hanaif.re.kr/boardDetail.do?hmpeSeqNo=33679" },
+  { title: "가계부채 위기와 채무조정제도의 개선", outlet: "하나금융연구소 「논단」", date: "2016.07.11", url: "https://www.hanaif.re.kr/boardDetail.do?hmpeSeqNo=32135" },
+  { title: "최근 경제·사회 이슈와 가계금융의 중요성", outlet: "하나금융연구소 「논단」", date: "2015.10.19", url: "https://www.hanaif.re.kr/boardDetail.do?hmpeSeqNo=31186" },
+  { title: "가계부채 디레버리징(deleveraging)이 필요하다", outlet: "하나금융연구소 「논단」", date: "2012.02.06", url: "https://www.hanaif.re.kr/boardDetail.do?hmpeSeqNo=25108" },
+];
+
+/**
  * 언론 인용 · 인터뷰
  * 기자가 전문가로 취재·인용한 기사. 발언은 기사 원문 그대로 인용한다.
  */

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { policyActivities, editorships, books } from "@/data/insights";
+import { policyActivities, editorships, books, instituteEssays } from "@/data/insights";
 import { getColumns, getVideos, getMedia } from "@/lib/content";
 import PageHero from "@/components/PageHero";
 import SectionTitle from "@/components/SectionTitle";
@@ -131,11 +131,47 @@ export default async function InsightsPage() {
               ))}
             </ol>
             <p className="text-xs text-slate-400 mt-5">
-              ※ 2025년 3월 이후분 일부입니다. 이전 연재분과 다른 매체 기고문은 순차 추가 예정입니다.
+              ※ 2025년 3월 이후분 일부입니다. 이전 연재분은 순차 추가 예정입니다.
             </p>
           </div>
         </section>
       )}
+
+      {/* 연구기관 기고 — 하나금융연구소 논단 */}
+      <section className="section-y border-b border-slate-200/80">
+        <div className="container-kwy">
+          <SectionTitle
+            kicker="Institutional Essays"
+            title="연구기관 기고"
+            desc="하나금융연구소가 외부 전문가에게 청탁하는 「논단」 지면에 2012년부터 기고한 글입니다. 가계부채와 채무조정, 주택금융, 고령화를 다뤘습니다."
+          />
+          <ol className="grid gap-3 md:grid-cols-2">
+            {instituteEssays.map((e) => (
+              <li key={e.url}>
+                <a
+                  href={e.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex items-start gap-4 bg-white rounded-2xl p-5 border border-slate-200/70 hover:border-blue-300 hover:bg-blue-50/40 transition-all h-full"
+                >
+                  <span className="num text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2.5 py-1 rounded-full shrink-0">
+                    {e.date.slice(0, 4)}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block font-bold text-base text-slate-900 leading-snug group-hover:text-blue-700 transition-colors">
+                      {e.title}
+                      <span className="text-blue-500"> ↗</span>
+                    </span>
+                    <span className="block text-xs font-medium text-slate-500 mt-1">
+                      {e.outlet} · <span className="num">{e.date}</span>
+                    </span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
       {/* 언론 인용 · 인터뷰 */}
       <section className="section-y border-b border-slate-200/80">
@@ -287,7 +323,7 @@ export default async function InsightsPage() {
 
       <JsonLd
         data={[
-          insightsSchema(columns),
+          insightsSchema(columns, instituteEssays),
           breadcrumbSchema([
             { name: "홈", path: "/" },
             { name: "정책·기고", path: "/insights/" },

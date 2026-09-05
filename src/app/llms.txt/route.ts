@@ -1,6 +1,7 @@
 import { SITE_URL } from "@/lib/site";
 import { profile } from "@/data/profile";
 import { trajectory, education } from "@/data/career";
+import { instituteEssays } from "@/data/insights";
 import { buildFaq } from "@/data/faq";
 import { getPublications } from "@/lib/content";
 
@@ -58,6 +59,10 @@ ${recent.map((p) => `- ${p.title} — ${p.venue}, ${p.ym.slice(0, 4)}${p.award ?
 ## 자주 묻는 질문
 
 ${faq.map((f) => `### ${f.q}\n\n${f.a}`).join("\n\n")}
+
+## 연구기관 기고 (하나금융연구소 「논단」)
+
+${instituteEssays.map((e) => `- ${e.title} (${e.date}) ${e.url}`).join("\n")}
 
 ## 공식 외부 프로필
 

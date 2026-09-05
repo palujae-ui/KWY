@@ -209,9 +209,16 @@ export function breadcrumbSchema(trail: { name: string; path: string }[]) {
  * 정책·기고 페이지 — 연재 칼럼을 원문 URL과 함께 노출한다.
  * 칼럼 본문은 언론사 사이트에 있으므로 url 로 1차 출처를 가리키고 저자만 명시한다.
  */
+/** 매체가 언론사인지 — 연구기관 논단과 신문 칼럼을 스키마에서 구분하기 위함 */
+function isNews(outlet: string): boolean {
+  return outlet.includes("신문");
+}
+
 export function insightsSchema(
-  columns: { title: string; outlet: string; date: string; url?: string }[]
+  columns: { title: string; outlet: string; date: string; url?: string }[],
+  essays: { title: string; outlet: string; date: string; url: string }[] = []
 ) {
+  const all = [...columns, ...essays];
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -221,17 +228,22 @@ export function insightsSchema(
     about: { "@id": PERSON_ID },
     mainEntity: {
       "@type": "ItemList",
-      name: "기고 칼럼",
-      numberOfItems: columns.length,
-      itemListElement: columns.map((c, i) => ({
+      name: "기고 칼럼·논단",
+      numberOfItems: all.length,
+      itemListElement: all.map((c, i) => ({
         "@type": "ListItem",
         position: i + 1,
+        // 신문 칼럼은 OpinionNewsArticle, 연구소 논단은 일반 Article 로 구분한다.
+        // 하나금융연구소는 언론사가 아니므로 NewsMediaOrganization 이 아니다.
         item: {
-          "@type": "OpinionNewsArticle",
+          "@type": isNews(c.outlet) ? "OpinionNewsArticle" : "Article",
           headline: c.title,
           datePublished: c.date.replace(/\./g, "-"),
           author: { "@id": PERSON_ID },
-          publisher: { "@type": "NewsMediaOrganization", name: c.outlet },
+          publisher: {
+            "@type": isNews(c.outlet) ? "NewsMediaOrganization" : "Organization",
+            name: c.outlet,
+          },
           inLanguage: "ko-KR",
           ...(c.url ? { url: c.url, mainEntityOfPage: c.url } : {}),
         },
