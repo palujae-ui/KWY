@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SiteChrome from "@/components/SiteChrome";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "유경원 | 상명대학교 경제금융학부",
     template: "%s | 유경원",
