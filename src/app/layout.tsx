@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SiteChrome from "@/components/SiteChrome";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, baseOpenGraph } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { personSchema, organizationSchema, websiteSchema } from "@/lib/jsonld";
 
@@ -28,13 +28,7 @@ export const metadata: Metadata = {
       "naver-site-verification": "93fe6f68bd93a44244068741751c7ae8",
     },
   },
-  openGraph: {
-    title: "유경원 | 상명대학교 경제금융학부",
-    description:
-      "가계부채·가계저축·인구고령화·서민금융 연구. 금융위원회 신용평가체계 개편 T/F 위원·새출발기금 심사위원장.",
-    type: "profile",
-    locale: "ko_KR",
-  },
+  openGraph: { ...baseOpenGraph, url: "/" },
 };
 
 export default function RootLayout({

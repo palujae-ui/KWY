@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { baseOpenGraph } from "@/lib/site";
 import { trajectory } from "@/data/career";
 import { getEducation, getCareer, getProfile, getPublications } from "@/lib/content";
 import Faq from "@/components/Faq";
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
   description:
     "유경원 교수의 학력과 경력. 한국개발연구원(KDI), 한국은행, 보험연구원을 거쳐 상명대학교 경제금융학부 재직.",
   alternates: { canonical: "/profile/", types: { "application/rss+xml": "/rss.xml" } },
+  openGraph: { ...baseOpenGraph, url: "/profile/" },
 };
 
 export const revalidate = 10;

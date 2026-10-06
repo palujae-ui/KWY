@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { baseOpenGraph } from "@/lib/site";
 import { formatYm, ymNum } from "@/data/publications";
 import { books } from "@/data/insights";
 import { getProfile, getPublications, getEducation, getCareer } from "@/lib/content";
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
   title: "CV",
   description: "유경원 교수 이력서 (Curriculum Vitae) — 학력, 경력, 논문.",
   alternates: { canonical: "/cv/", types: { "application/rss+xml": "/rss.xml" } },
+  openGraph: { ...baseOpenGraph, url: "/cv/" },
 };
 
 export const revalidate = 10;

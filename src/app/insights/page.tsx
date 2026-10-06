@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { baseOpenGraph } from "@/lib/site";
 import {
   policyActivities,
   editorships,
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
   description:
     "금융위원회 신용평가체계 개편 T/F 위원·새출발기금 심사위원장 등 정책 활동, 내일신문 「경제시평」 연재 칼럼, 언론 인용·방송 출연 및 학술지 편집 활동.",
   alternates: { canonical: "/insights/", types: { "application/rss+xml": "/rss.xml" } },
+  openGraph: { ...baseOpenGraph, url: "/insights/" },
 };
 
 export default async function InsightsPage() {

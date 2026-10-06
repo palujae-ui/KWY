@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { baseOpenGraph } from "@/lib/site";
 import Link from "next/link";
 import { trajectory } from "@/data/career";
 import { policyActivities } from "@/data/insights";
@@ -9,6 +10,7 @@ import Portrait from "@/components/Portrait";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/", types: { "application/rss+xml": "/rss.xml" } },
+  openGraph: { ...baseOpenGraph, url: "/" },
 };
 
 // 논문 수·대표 연구를 DB에서 읽으므로 관리자 저장 후 반영.
