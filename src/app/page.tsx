@@ -8,7 +8,7 @@ import SectionTitle from "@/components/SectionTitle";
 import Portrait from "@/components/Portrait";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "/" },
+  alternates: { canonical: "/", types: { "application/rss+xml": "/rss.xml" } },
 };
 
 // 논문 수·대표 연구를 DB에서 읽으므로 관리자 저장 후 반영.
