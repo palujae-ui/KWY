@@ -7,8 +7,9 @@ import { getColumns } from "@/lib/content";
  * /rss.xml — 네이버 서치어드바이저 「RSS 제출」·피드 리더용.
  *
  * 항목 = 사이트 주요 페이지 + 기고(내일신문·서울경제·하나금융연구소).
- * 기고는 원문(언론사) 링크를 그대로 둔다. 네이버는 등록 도메인(kwyoo.co) 링크만
- * 수집에 쓰므로 실제 색인 효과는 페이지 항목에서 나온다.
+ * 네이버 RSS 검사는 <link>가 등록 도메인(kwyoo.co)이어야 통과한다. 그래서 기고 항목의
+ * link는 /insights/(목록 페이지)로 두고, 언론사 원문 주소는 guid(isPermaLink=false)와
+ * 본문에 남긴다.
  * 칼럼 병합 규칙은 /insights 페이지와 같다(DB 우선, URL 중복 제거).
  */
 export const revalidate = 86400;
@@ -62,9 +63,9 @@ export async function GET() {
   const writingItems = writings.map(
     (c) => `    <item>
       <title>${esc(c.title)}</title>
-      <link>${esc(c.url!)}</link>
-      <guid isPermaLink="true">${esc(c.url!)}</guid>
-      <description>${esc(`${c.outlet} · ${profile.nameKo} ${profile.affiliation} ${profile.title}`)}</description>
+      <link>${SITE_URL}/insights/</link>
+      <guid isPermaLink="false">${esc(c.url!)}</guid>
+      <description>${esc(`${c.outlet} · ${profile.nameKo} ${profile.affiliation} ${profile.title} · 원문 ${c.url}`)}</description>
       <category>${esc(c.outlet)}</category>
       <pubDate>${rfc822(c.date)}</pubDate>
     </item>`

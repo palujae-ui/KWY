@@ -14,7 +14,8 @@ const routes: { path: string; priority: number }[] = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
+  // 네이버 검사 호환을 위해 밀리초 없는 날짜(YYYY-MM-DD)만 쓴다.
+  const lastModified = new Date().toISOString().slice(0, 10);
   return routes.map(({ path, priority }) => ({
     url: `${SITE_URL}${path}`,
     lastModified,
